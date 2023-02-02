@@ -21,6 +21,7 @@
     - Container for thumbnail (e.g. "thumbnails")
     - These two containers can be the same or different storage accounts.
 - Function app
+    - .NET6
 
 ## How to deploy
 Execute the following commands using Azure CLI or [Cloud Shell](https://learn.microsoft.com/en-us/azure/cloud-shell/overview).
