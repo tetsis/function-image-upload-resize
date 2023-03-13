@@ -2,15 +2,15 @@
 
 ## Architecture
 ```
-           |-Blob Storage-------|            |-Event Grid-|
-- Upload ->| "images" container |- Created ->| topic      |--
-           |--------------------|            |------------| |
-                                                            |
-                                                  Subscribe |
-                                                            |
-|-Blob Storage-----------|           |-Azure Functions-|    |
-| "thumbnails" container |<- Upload -| funciton app    |<----
-|------------------------|           |-----------------|
+           |-Blob Storage-------|                    |-Event Grid-|
+- Upload ->| "images" container |- Created/Deleted ->| topic      |--
+           |--------------------|                    |------------| |
+                                                                    |
+                                                          Subscribe |
+                                                                    |
+|-Blob Storage-----------|                  |-Azure Functions-|     |
+| "thumbnails" container |<- Upload/Delete -| funciton app    |<-----
+|------------------------|                  |-----------------|
 ```
 
 ## Prerequisites
@@ -46,6 +46,12 @@ az functionapp deployment source config --name $functionapp --resource-group $re
 
 - Create an event subscription
 	- https://learn.microsoft.com/en-us/azure/event-grid/resize-images-on-storage-blob-upload-event#create-an-event-subscription
+    - If you want to delete thumbnail images when origin images are deleted, you can use "DeleteThumbnail" function.
+
+| Event | Function |
+| --- | --- |
+| Blob Created | Thumbnail |
+| Blob Deleted | DeleteThumbnail |
 
 ## References
 - [Tutorial: Use Azure Event Grid to automate resizing uploaded images - Azure Event Grid | Microsoft Learn](https://learn.microsoft.com/en-us/azure/event-grid/resize-images-on-storage-blob-upload-event)
